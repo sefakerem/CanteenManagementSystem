@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -164,13 +165,30 @@ void productInfo::deleteItem() {
 void productInfo::editItem() {
 
 	string name;
+	int counter = 0;
 
 	cout << "\n\n" << "Enter You Want Edit Item's Name: ";
 	cin >> name;
 
+	for (int i = 0; i < productName.size() ; i++)
+	{
+		if (productName[i] == name) 
+		{
+							 //
+			cout << "\nEnter New Name: ";
+			cin >> itemName;
+			cout << "\nEnter New ID: ";
+			cin >> itemID;
+			cout << "\nEnter New Quantity: ";
+			cin >> itemQua;
 
+			productName[i] = itemName;
+			productID[i] = itemID;
+			productQua[i] = itemQua;
 
-
+			cout << "\n\n\t\tSuccessfully Changed." << endl;
+		}
+	}
 
 
 }
