@@ -20,8 +20,7 @@ int main() {
 		cout << "\t\t\t\t\tCANTEEN MANAGEMENT SYSTEM\n\n" << endl;
 		cout << "\t\t\t1. Add New Item" << endl << "\t\t\t" << "2. Edit Item" << endl << "\t\t\t" << "3. Delete Item" << endl << "\t\t\t" << "4. Search Item by Name" << endl << "\t\t\t" << "5. Search Item by ID" << endl << "\t\t\t" << "6. All Items" << endl << "\t\t\t" << "7. Exit" << endl << endl;
 		cout << "\n\t*****************************************************************************************\n\n" << endl;
-		
-		
+			
 		switch (secim)
 		{
 		case 1:
