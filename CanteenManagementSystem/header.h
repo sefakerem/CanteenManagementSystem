@@ -83,35 +83,87 @@ void productInfo::allItems() {
 
 void productInfo::addItem() {	
 
-cursor:
-	
-	cout << "\n\n" << "Enter Item's Name: ";
-	cin >> itemName;
-
-	/*for (int i = 0; i < productName.size() ; i++)
+	while (1)
 	{
-		if (productName[i] == itemName) {
-			cout << "\n\n" << "They have already added." << endl;
-			goto cursor;
+		cursor:
+		char question;
+		string textData;
+		vector<string>temporary;
+
+		fstream file1;
+		file1.open("data.txt");
+
+		while (getline(file1, textData, ' '))
+		{
+			temporary.push_back(textData);
 		}
-	}*/
-	
-	cout << "\n" << "Enter Item's ID: ";
-	cin >> itemID;
 
-	cout << "\n" << "Enter Item's Quantity: ";
-	cin >> itemQua;
-	
-	fstream file;
-	file.open("data.txt",ios::app);
-	
-	file << itemName << " ";
-	file << itemID << " ";
-	file << itemQua << " ";
+		for (int i = 0; i < temporary.size(); i++)
+		{
+			productName.push_back(temporary[i]);
+			i += 1;
 
-	file.close();
+			productID.push_back(temporary[i]);
+			i += 1;
+
+			productQua.push_back(temporary[i]);
+		}
+
+		cout << "\n\n" << "Enter Item's Name: ";
+		cin >> itemName;
+
+		if (itemName == "7")
+		{
+			break;
+		}
+
+		for (int i = 0; i < productName.size(); i++)
+		{
+			if (productName[i] == itemName) {
+				cout << "\n\n\t" << "It's already added." << endl;
+				goto cursor;
+			}
+		}
+
+		cout << "\n" << "Enter Item's ID: ";
+		cin >> itemID;
+
+		cout << "\n" << "Enter Item's Quantity: ";
+		cin >> itemQua;
+
+		fstream file;
+		file.open("data.txt", ios::app);
+
+		file << itemName << " ";
+		file << itemID << " ";
+		file << itemQua << " ";
+
+		file.close();
+
+		cout << "\n\n" << "\t\t" << "Successfully Added." << "\n" << endl;
+		
+		productName.clear();
+		productID.clear();
+		productQua.clear();
 	
-	cout << "\n\n" << "\t\t" <<"Successfully Added." << "\n" << endl;		
+		cout << "\n\nDo you want to add another item? [Y/N]: ";
+		cin >> question;
+
+		switch (question)
+		{
+		case 'Y':
+		case 'y':
+			goto cursor;
+		
+		case 'N':
+		case 'n':
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+		
 }
 
 void productInfo::findItembyName() {
