@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 class productInfo
 {
 	string itemName, itemID, itemQua;
@@ -44,7 +43,7 @@ void productInfo::allItems() {
 	fstream file1; 
 	file1.open("data.txt");
 
-	while (getline(file1,textData,' '))
+	while (getline(file1,textData))
 	{
 		temporary.push_back(textData);
 	}
@@ -60,32 +59,49 @@ void productInfo::allItems() {
 		productQua.push_back(temporary[i]);
 	}
 	
-	file1.close();
-		
-	cout << "\n\n\n" <<"--------------------------------------------------------------" << endl;
-	cout << "Name" << "\t\t" << "ID" << "\t\t" << "Quantity" << endl << endl;
+	cout << "\n\n\n" << "-------------------------------------------------------------------------" << endl;
+	cout << "        Name" << "\t\t\t" << "ID" << "\t\t\t" << "Quantity" << endl;
+	cout << "-------------------------------------------------------------------------" << endl;
 
-	for (int i = 0; i < productName.size() ; i++)
+	for (int i = 0; i < productName.size(); i++)
 	{
-		cout << productName[i];
-		cout << "\t\t" << productID[i];
-		cout << "\t\t" << productQua[i];
-		cout << endl;	
-		cout << endl;
+		if (productName[i].size() >= 10)
+		{
+			cout << "  " << i + 1 << "." << " " << productName[i];
+			cout << "\t\t";
+			cout << productID[i];
+			cout << "\t\t\t";
+			cout << productQua[i];
+			cout << "\n\n";
+		}		
+		else
+		{
+			cout << "  " << i + 1 << "." << " " << productName[i];
+			cout << "\t\t\t";
+			cout << productID[i];
+			cout << "\t\t\t";
+			cout << productQua[i];
+			cout << "\n\n";
+		}
+			
 	}
-	cout << "--------------------------------------------------------------" << endl;
-	
+
+	cout << "-------------------------------------------------------------------------" << endl;
+
+
 	productName.clear();
 	productID.clear();
 	productQua.clear();
+	
+	file1.close();
 }
-
 
 void productInfo::addItem() {	
 
 	while (1)
-	{
+	{		
 		cursor:
+		cin.ignore();
 		char question;
 		string textData;
 		vector<string>temporary;
@@ -93,7 +109,7 @@ void productInfo::addItem() {
 		fstream file1;
 		file1.open("data.txt");
 
-		while (getline(file1, textData, ' '))
+		while (getline(file1, textData))
 		{
 			temporary.push_back(textData);
 		}
@@ -110,7 +126,7 @@ void productInfo::addItem() {
 		}
 
 		cout << "\n\n" << "Enter Item's Name: ";
-		cin >> itemName;
+		getline(cin, itemName);
 
 		if (itemName == "7")
 		{
@@ -121,12 +137,22 @@ void productInfo::addItem() {
 		{
 			if (productName[i] == itemName) {
 				cout << "\n\n\t" << "It's already added." << endl;
+				file1.close();
 				goto cursor;
 			}
 		}
-
+	
 		cout << "\n" << "Enter Item's ID: ";
 		cin >> itemID;
+		
+		for (int i = 0; i < productID.size(); i++)
+		{
+			if (productID[i] == itemID) {
+				cout << "\n\n\t" << "It's already added." << endl;
+				file1.close();
+				goto cursor;
+			}
+		}
 
 		cout << "\n" << "Enter Item's Quantity: ";
 		cin >> itemQua;
@@ -134,9 +160,9 @@ void productInfo::addItem() {
 		fstream file;
 		file.open("data.txt", ios::app);
 
-		file << itemName << " ";
-		file << itemID << " ";
-		file << itemQua << " ";
+		file << itemName << endl;
+		file << itemID << endl;
+		file << itemQua << endl;
 
 		file.close();
 
@@ -153,8 +179,8 @@ void productInfo::addItem() {
 		{
 		case 'Y':
 		case 'y':
+			file1.close();
 			goto cursor;
-		
 		case 'N':
 		case 'n':
 			break;
@@ -163,11 +189,11 @@ void productInfo::addItem() {
 		}
 		break;
 	}
-		
 }
 
 void productInfo::findItembyName() {
-	
+	cin.ignore();
+
 	string item;
 	int counter = 0;
 	string textData;
@@ -176,7 +202,7 @@ void productInfo::findItembyName() {
 	fstream file1;
 	file1.open("data.txt");
 
-	while (getline(file1, textData, ' '))
+	while (getline(file1, textData))
 	{
 		temporary.push_back(textData);
 	}
@@ -192,23 +218,36 @@ void productInfo::findItembyName() {
 		productQua.push_back(temporary[i]);
 	}
 
-
 	cout << "\n\n" << "Enter You Want Search Item's Name: ";
-	cin >> item;
+	getline(cin, item);
 
 	for (int i = 0; i < productName.size(); i++)
 	{
 		if (productName[i] == item)
 		{
-			cout << "\n\n\t\t    ---- Results ----";
-			cout << "\n\n\n" << "--------------------------------------------------------------" << endl;
-			cout << "Name" << "\t\t" << "ID" << "\t\t" << "Quantity" << endl << endl;
-			cout << productName[i];
-			cout << "\t\t" << productID[i];
-			cout << "\t\t" << productQua[i];
-			cout << endl;
-			cout << endl;
-			cout << "--------------------------------------------------------------" << endl << endl << endl;
+			cout << "\n\n\t\t\t---- Results ----" << endl << endl << endl;
+			cout << "        Name" << "\t\t\t" << "ID" << "\t\t\t" << "Quantity" << endl;
+			cout << "-------------------------------------------------------------------------" << endl << endl;
+			
+			if (productName[i].size() >= 10)
+			{
+				cout << "  " << i + 1 << "." << " " << productName[i];
+				cout << "\t\t";
+				cout << productID[i];
+				cout << "\t\t\t";
+				cout << productQua[i];
+				cout << "\n\n";
+			}
+			else
+			{
+				cout << "  " << i + 1 << "." << " " << productName[i];
+				cout << "\t\t\t";
+				cout << productID[i];
+				cout << "\t\t\t";
+				cout << productQua[i];
+				cout << "\n\n";
+			}
+			cout << "-------------------------------------------------------------------------" << endl << endl << endl;
 			counter += 1;
 		}
 	}
@@ -231,7 +270,7 @@ void productInfo::findItembyID() {
 	fstream file1;
 	file1.open("data.txt");
 
-	while (getline(file1, textData, ' '))
+	while (getline(file1, textData))
 	{
 		temporary.push_back(textData);
 	}
@@ -254,14 +293,29 @@ void productInfo::findItembyID() {
 	{
 		if (productID[i] == id)
 		{
-			cout << "\n\n\n" << "--------------------------------------------------------------" << endl;
-			cout << "Name" << "\t\t" << "ID" << "\t\t" << "Quantity" << endl << endl;
-			cout << productName[i];
-			cout << "\t\t" << productID[i];
-			cout << "\t\t" << productQua[i];
-			cout << endl;
-			cout << endl;
-			cout << "--------------------------------------------------------------" << endl;
+			cout << "\n\n\t\t\t---- Results ----" << endl << endl << endl;
+			cout << "        Name" << "\t\t\t" << "ID" << "\t\t\t" << "Quantity" << endl;
+			cout << "-------------------------------------------------------------------------" << endl << endl;
+
+			if (productName[i].size() >= 10)
+			{
+				cout << "  " << i + 1 << "." << " " << productName[i];
+				cout << "\t\t";
+				cout << productID[i];
+				cout << "\t\t\t";
+				cout << productQua[i];
+				cout << "\n\n";
+			}
+			else
+			{
+				cout << "  " << i + 1 << "." << " " << productName[i];
+				cout << "\t\t\t";
+				cout << productID[i];
+				cout << "\t\t\t";
+				cout << productQua[i];
+				cout << "\n\n";
+			}
+			cout << "-------------------------------------------------------------------------" << endl << endl << endl;
 			counter += 1;
 		}
 	}
@@ -277,8 +331,9 @@ void productInfo::findItembyID() {
 
 
 void productInfo::deleteItem() {
-	
-	string id;
+	cin.ignore();
+
+	string name;
 	int counter = 0;
 	string textData;
 	vector<string>temporary;
@@ -286,7 +341,7 @@ void productInfo::deleteItem() {
 	fstream file1;
 	file1.open("data.txt");
 
-	while (getline(file1, textData, ' '))
+	while (getline(file1, textData))
 	{
 		temporary.push_back(textData);
 	}
@@ -305,11 +360,11 @@ void productInfo::deleteItem() {
 	file1.close();
 
 	cout << "\n\n" << "Enter You Want Remove Item's Name: ";
-	cin >> id;
+	getline(cin,name);
 
 	for (int i = 0; i < productName.size() ; i++)
 	{
-		if (productName[i] == id)
+		if (productName[i] == name)
 		{
 			productName.erase(productName.begin() + i);
 			productID.erase(productID.begin() + i);
@@ -321,9 +376,9 @@ void productInfo::deleteItem() {
 			file.open("data.txt", ios::app);			
 			for (int i = 0; i < productName.size(); i++)
 			{
-				file << productName[i] << " ";
-				file << productID[i] << " ";
-				file << productQua[i]<< " ";
+				file << productName[i] << endl;
+				file << productID[i] << endl;
+				file << productQua[i] << endl;		
 			}		
 			file.close();			
 			cout << "\n\n" << "\t\t" << "Successfully Removed." << "\n" << endl;
@@ -340,30 +395,82 @@ void productInfo::deleteItem() {
 
 void productInfo::editItem() {
 
-	string name;
-	int counter = 0;
-
-	cout << "\n\n" << "Enter You Want Edit Item's Name: ";
-	cin >> name;
-
-	for (int i = 0; i < productName.size() ; i++)
+	while (true)
 	{
-		if (productName[i] == name) 
+		cin.ignore();
+		string name;
+		int counter = 0;
+
+		string textData;
+		vector<string>temporary;
+
+		fstream file1;
+		file1.open("data.txt");
+
+		while (getline(file1, textData))
 		{
-							 //
-			cout << "\nEnter New Name: ";
-			cin >> itemName;
-			cout << "\nEnter New ID: ";
-			cin >> itemID;
-			cout << "\nEnter New Quantity: ";
-			cin >> itemQua;
-
-			productName[i] = itemName;
-			productID[i] = itemID;
-			productQua[i] = itemQua;
-
-			cout << "\n\n\t\tSuccessfully Changed." << endl;
+			temporary.push_back(textData);
 		}
+
+		file1.close();
+
+		for (int i = 0; i < temporary.size(); i++)
+		{
+			productName.push_back(temporary[i]);
+			i += 1;
+
+			productID.push_back(temporary[i]);
+			i += 1;
+
+			productQua.push_back(temporary[i]);
+		}
+
+		cout << "\n\n" << "Enter You Want Edit Item's Name: ";
+		getline(cin, name);
+
+		if (name == "7")
+		{
+			break;
+		}
+
+		for (int i = 0; i < productName.size(); i++)
+		{
+			if (productName[i] == name) {
+				
+				cout << "\nEnter New Name: ";
+				getline(cin, itemName);
+
+				cout << "\nEnter New ID: ";
+				cin >> itemID;
+
+				cout << "\nEnter New Quantity: ";
+				cin >> itemQua;
+
+				productName[i] = itemName;
+				productID[i] = itemID;
+				productQua[i] = itemQua;
+
+				break;
+			}			
+		}
+
+		remove("data.txt");
+		ofstream file;
+		file.open("data.txt", ios::app);
+		for (int i = 0; i < productName.size(); i++)
+		{
+			file << productName[i] << endl;
+			file << productID[i] << endl;
+			file << productQua[i] << endl;
+		}
+		file.close();
+
+		cout << "\n\n\t\tSuccessfully Changed." << endl;
+
+		productName.clear();
+		productID.clear();
+		productQua.clear();
+		break;
 	}
 
 
