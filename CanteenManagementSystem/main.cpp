@@ -8,7 +8,7 @@ int main() {
 	cout << "\t*****************************************************************************************\n\n" << endl;
 	cout << "\t\t\t\t\tCANTEEN MANAGEMENT SYSTEM\n\n" << endl;
 	cout << "\t\t\t1. Add New Item" << endl << "\t\t\t" << "2. Edit Item" << endl << "\t\t\t" << "3. Delete Item" << endl << "\t\t\t" << "4. Search Item by Name" << endl << "\t\t\t" << "5. Search Item by ID" << endl << "\t\t\t" << "6. All Items" << endl << "\t\t\t" << "7. Exit" << endl << endl;
-	cout << "\n\t*****************************************************************************************\n\n" << endl;
+	cout << "\n\t*****************************************************************************************\n\t\t\t\t\t\t\t\t\tcreated by CIHAT ASIR\n" << endl;
 	
 	while (1)
 	{
@@ -19,7 +19,7 @@ int main() {
 		cout << "\t*****************************************************************************************\n\n" << endl;
 		cout << "\t\t\t\t\tCANTEEN MANAGEMENT SYSTEM\n\n" << endl;
 		cout << "\t\t\t1. Add New Item" << endl << "\t\t\t" << "2. Edit Item" << endl << "\t\t\t" << "3. Delete Item" << endl << "\t\t\t" << "4. Search Item by Name" << endl << "\t\t\t" << "5. Search Item by ID" << endl << "\t\t\t" << "6. All Items" << endl << "\t\t\t" << "7. Exit" << endl << endl;
-		cout << "\n\t*****************************************************************************************\n\n" << endl;
+		cout << "\n\t*****************************************************************************************\n\t\t\t\t\t\t\t\t\tcreated by CIHAT ASIR\n" << endl;
 			
 		switch (secim)
 		{

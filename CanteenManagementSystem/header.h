@@ -148,7 +148,7 @@ void productInfo::addItem() {
 		for (int i = 0; i < productID.size(); i++)
 		{
 			if (productID[i] == itemID) {
-				cout << "\n\n\t" << "It's already added." << endl;
+				cout << "\n\n\t" << "This id is being used." << endl;
 				file1.close();
 				goto cursor;
 			}
@@ -440,8 +440,18 @@ void productInfo::editItem() {
 				cout << "\nEnter New Name: ";
 				getline(cin, itemName);
 
+				cursor:
 				cout << "\nEnter New ID: ";
 				cin >> itemID;
+				
+
+				for (int i = 0; i < productID.size(); i++)
+				{
+					if (productID[i] == itemID) {
+						cout << "\n\n\t" << "This id is being used." << endl;
+						goto cursor;
+					}
+				}
 
 				cout << "\nEnter New Quantity: ";
 				cin >> itemQua;
