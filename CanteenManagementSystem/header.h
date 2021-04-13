@@ -395,6 +395,8 @@ void productInfo::deleteItem() {
 
 void productInfo::editItem() {
 
+	int notFound = 0;
+
 	while (true)
 	{
 		cin.ignore();
@@ -437,6 +439,7 @@ void productInfo::editItem() {
 		{
 			if (productName[i] == name) {
 				
+				notFound++;
 				cout << "\nEnter New Name: ";
 				getline(cin, itemName);
 
@@ -464,6 +467,12 @@ void productInfo::editItem() {
 			}			
 		}
 
+		if (notFound == 0)
+		{
+			cout << "\n\t\t)-: Item Not Found :-(" << endl;
+			break;
+		}
+
 		remove("data.txt");
 		ofstream file;
 		file.open("data.txt", ios::app);
@@ -482,6 +491,4 @@ void productInfo::editItem() {
 		productQua.clear();
 		break;
 	}
-
-
 }

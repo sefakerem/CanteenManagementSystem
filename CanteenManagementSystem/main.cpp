@@ -14,6 +14,7 @@ int main() {
 	{
 		cout << "\n\n" <<"Please select an option: ";
 		cin >> secim;
+
 		system("cls");
 		
 		cout << "\t*****************************************************************************************\n\n" << endl;
@@ -23,6 +24,9 @@ int main() {
 			
 		switch (secim)
 		{
+		case 0:
+			cout << "\n" << "You didn't enter a number. Please restart program." << endl;
+			break;
 		case 1:
 			main.addItem();
 			continue;
